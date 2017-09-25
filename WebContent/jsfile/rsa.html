@@ -1,0 +1,37 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>JavaScript RSA Encryption</title>
+    <script src="jquery-1.11.2.min.js"></script>
+    <script src="jsencrypt.min.js"></script>
+    <script type="text/javascript">
+
+		$(function() {
+        	$('#testme').click(function(){
+	          	// 1.公钥加密
+	          	var encrypt = new JSEncrypt();
+	          	// hex
+	          	encrypt.setPublicKey("30819f300d06092a864886f70d010101050003818d0030818902818100974f713ab97d286666a99565a7777be8345412ee4e734a74a38169d1836a107fc6093cb13d894fae5053bc9e7eaeb0540a41658aa0ddc3100d487f10201222c71efcfc72b1782f4b12e10ce22cc1547a820fef1e32e7fe367df9089ba644d3b21b16c54a1d67350864f40d5eb6f62fbb038bd3fc214fe01f0314cacab273308b0203010001");
+	          	var encrypted = encrypt.encrypt($('#input').val());
+	
+	          	// 2.私钥解密
+	          	var decrypt = new JSEncrypt();
+	       		// hex
+	          	decrypt.setPrivateKey("30820276020100300d06092a864886f70d0101010500048202603082025c02010002818100974f713ab97d286666a99565a7777be8345412ee4e734a74a38169d1836a107fc6093cb13d894fae5053bc9e7eaeb0540a41658aa0ddc3100d487f10201222c71efcfc72b1782f4b12e10ce22cc1547a820fef1e32e7fe367df9089ba644d3b21b16c54a1d67350864f40d5eb6f62fbb038bd3fc214fe01f0314cacab273308b02030100010281805adca6d727ea23a79280c5a91caea0a6a93dcf7c7179c43d54ae7318107d51d918d8152d2e11d5da8c7c2c6955139be96b9b27d9de8e2d03e7a6203f53b2f0548652ad86041c267d473f4de77b8e58af488c8278c7eacd97bcf84507922036bd7b030db1344b31e5a79bd95d7f976a2e097bfe4d2700f9e2859e3bb7b2f4b0f1024100f62b4200b22736a523c995b4c4bb44bdf8d0c928b42a9cc9d670c72220a7b37a7adf0d1e2e1163330efdd5ec60ae266fbc4e31baa91a8f73b8544a3326db54130241009d5a6251ab9f8f3a24a2d9f2f34d0f9030d56296d3ad45692d59cf9338c431f1f272f2c917da02c54746e74730bc586253c9dac9ef06990365c15f2d41ea90a9024100b949ec1f3bf95a1f48e5a5c26fc60942f8b2a686f5bd91503711a241a4d4b5ba3e1bfff2b4782ff3b1980c5a249750a50fd6c785995d3d96bbaaee42bc3fa073024046e2f4effdf4ffbd1dcc0f8b9777dbcf0570dbdd3eb70c51f9904026fea7c4284f24e1a31e0fa4b7e3085a2084201561168614fe6ba3f942c2907ea410d1ef21024024754df58dc2964e1360198fba0a722dda56cc3b521d37bb338197dd9fcc7c0ea71ceed5763b40de4fa7237581f0b0205dea1cf0a0dea68a0741798186381b3b");
+	          	var uncrypted = decrypt.decrypt(encrypted);
+			  
+			  	// 3.解密结果
+			  	alert(uncrypted);
+        	});
+      	});
+		
+    </script>
+</head>
+<body>
+
+	<label for="input">加密文本:</label><br/>
+	<textarea id="input" name="input" type="text" rows=4 cols=70>测试字符串！！！</textarea><br/>
+	<input id="testme" type="button" value="测试" /><br/>
+	
+</body>
+</html>
